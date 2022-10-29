@@ -29,7 +29,8 @@ def indexes(line:String): (String,String)={
       val array =(pattern2.findAllIn(line)).toArray
       val string1 = ((pattern1.findFirstIn(line)).get).split("#index")(1)
       val string2 = (array.mkString(""))
-      (string1,string2)
+      val string3 = (array.mkString(""))
+      (string1,string2,string3)
       }
 
  val filterrdd=inputrdd.filter(x=>x.contains("#%")).map(line=>indexes(line)).flatMapValues(cites=>cites.split("#%")).filter{case(index,cites)=>cites!=""}.map(x=>x._1.trim()+" "+x._2.trim())
